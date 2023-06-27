@@ -1,0 +1,17 @@
+C:\Users\admin\source\repos\NetPortProxy\bin\Debug\net6.0-windows\NetPortProxy.exe
+C:\Users\admin\source\repos\NetPortProxy\bin\Debug\net6.0-windows\NetPortProxy.deps.json
+C:\Users\admin\source\repos\NetPortProxy\bin\Debug\net6.0-windows\NetPortProxy.runtimeconfig.json
+C:\Users\admin\source\repos\NetPortProxy\bin\Debug\net6.0-windows\NetPortProxy.dll
+C:\Users\admin\source\repos\NetPortProxy\bin\Debug\net6.0-windows\NetPortProxy.pdb
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.Form1.resources
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.csproj.GenerateResource.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.AssemblyInfoInputs.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.AssemblyInfo.cs
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.dll
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\refint\NetPortProxy.dll
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.pdb
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\NetPortProxy.genruntimeconfig.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\net6.0-windows\ref\NetPortProxy.dll
