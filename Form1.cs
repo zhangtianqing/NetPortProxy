@@ -1,82 +1,43 @@
-using NetPortProxy.Bridge;
-using System.Net;
-using System.Net.Sockets;
+Ôªøusing NetPortProxy.Bridge;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace NetPortProxy
 {
     public partial class Form1 : Form
     {
+        ProxyConfig proxyConfig = new ProxyConfig();
+        BaseBridge baseBridge;
+        int serverModel = -1;
+        public static Form1 ins;
         public Form1()
         {
             InitializeComponent();
+            ins = this;
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        public void LogMsg(string str)
         {
-            Console.WriteLine("SlectIndex:" + this.comboBox1.SelectedIndex);
-        }
-
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-        /// <summary>
-        /// ∂¡»°≈‰÷√
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            LoadConfig();
-        }
-
-        /// <summary>
-        /// ±£¥Ê≈‰÷√
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button4_Click(object sender, EventArgs e)
-        {
-            proxyConfig.SaveProxyConfig(this.textBox_remote_ip.Text, int.Parse(this.textBox_remote_port.Text), this.textBox_local_ip.Text, int.Parse(this.textBox_local_port.Text), this.checkBox_AutoStart.Checked, this.comboBox1.SelectedIndex);
-        }
-        /// <summary>
-        /// ø™∆Ù∑˛ŒÒ
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            OpenServer();
-        }
-        /// <summary>
-        /// πÿ±’∑˛ŒÒ
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button3_Click(object sender, EventArgs e)
-        {
-            CloseServer();
-        }
-
-        ProxyConfig proxyConfig = new ProxyConfig();
-
-
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            LoadConfig();
-            if (proxyConfig.autoStart)
+            if (textBox_Log.Text.Length > 10000)
             {
-                OpenServer();
+                textBox_Log.Text = "";
             }
-
+            if (textBox_Log.Text != "")
+                textBox_Log.Text += "\r\n";
+            textBox_Log.Text += $"{DateTime.Now.ToString("HH:mm:ss")}:{str}";
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopServer(null, null);
         }
 
-        private void LoadConfig()
+        private void LoadConfig(object sender, EventArgs e)
         {
             proxyConfig.LoadConfig();
             this.checkBox_AutoStart.Checked = proxyConfig.autoStart;
@@ -88,12 +49,15 @@ namespace NetPortProxy
             this.textBox_remote_port.Text = proxyConfig.remotePort + "";
 
             this.comboBox1.SelectedIndex = proxyConfig.protocol;
+            LogMsg("ÈÖçÁΩÆËØªÂèñÊàêÂäü");
         }
 
-        bool serverState = false;
+        private void SaveConfig(object sender, EventArgs e)
+        {
+            proxyConfig.SaveProxyConfig(this.textBox_remote_ip.Text, int.Parse(this.textBox_remote_port.Text), this.textBox_local_ip.Text, int.Parse(this.textBox_local_port.Text), this.checkBox_AutoStart.Checked, this.comboBox1.SelectedIndex);
+        }
 
-        int serverModel = -1;
-        void OpenServer()
+        private void StartServer(object sender, EventArgs e)
         {
             if (serverModel != -1)
             {
@@ -119,79 +83,30 @@ namespace NetPortProxy
                 baseBridge.OpenServer();
 
                 serverModel = this.comboBox1.SelectedIndex;
-                this.toolStripStatusLabel1.Text = "“—∆Ù∂Ø";
+                this.toolStripStatusLabel_state.Text = "Â∑≤ÂêØÂä®";
             }
-            catch (Exception e)
+            catch (Exception er)
             {
-                CloseServer();
-                MessageBox.Show("∆Ù∂Ø“Ï≥££∫" + e.Message);
+                StopServer(null, null);
+                LogMsg("ÂêØÂä®ÂºÇÂ∏∏Ôºö" + er.Message);
             }
 
         }
-        BaseBridge baseBridge;
 
-
-        void UpdateLog(string str)
-        {
-            this.toolStripStatusLabel3.Text = $"Ã· æ–≈œ¢£∫{str}";
-        }
-        void CloseServer()
+        private void StopServer(object sender, EventArgs e)
         {
             baseBridge?.CloseServer();
             serverModel = -1;
-            this.toolStripStatusLabel1.Text = "“—Õ£÷π";
+            this.toolStripStatusLabel_state.Text = "Â∑≤ÂÅúÊ≠¢";
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            CloseServer();
-        }
-    }
-    public class ProxyConfig
-    {
-        public string remoteAddress = "";
-        public int remotePort;
-        public string localAddress = "";
-        public int localPort;
-        public bool autoStart = false;
-        public int protocol = 0;
-
-        public ProxyConfig()
-        {
-            LoadConfig();
-        }
-        public void LoadConfig()
-        {
-
-            this.autoStart = INIHelper.GetBool(nameof(autoStart));
-
-            this.remoteAddress = INIHelper.GetString(nameof(remoteAddress));
-            this.remotePort = INIHelper.GetInt(nameof(remotePort));
-            this.localAddress = INIHelper.GetString(nameof(localAddress));
-            this.localPort = INIHelper.GetInt(nameof(localPort));
-
-            this.protocol = INIHelper.GetInt(nameof(protocol));
-        }
-
-        public bool SaveProxyConfig(string remoteAddress, int remotePort, string localAddress, int localPort, bool autoStart, int protocol)
-        {
-            this.remoteAddress = remoteAddress;
-            this.remotePort = remotePort;
-            this.localAddress = localAddress;
-            this.localPort = localPort;
-            this.autoStart = autoStart;
-            this.protocol = protocol;
-            INIHelper.WriteBool(nameof(autoStart), INIHelper.SectionName.config, this.autoStart);
-
-            INIHelper.WriteString(nameof(remotePort), INIHelper.SectionName.config, this.remotePort + "");
-            INIHelper.WriteString(nameof(remoteAddress), INIHelper.SectionName.config, this.remoteAddress + "");
-
-            INIHelper.WriteString(nameof(localPort), INIHelper.SectionName.config, this.localPort + "");
-            INIHelper.WriteString(nameof(localAddress), INIHelper.SectionName.config, this.localAddress + "");
-
-            INIHelper.WriteString(nameof(protocol), INIHelper.SectionName.config, this.protocol + "");
-            MessageBox.Show("±£¥Ê≥…π¶");
-            return true;
+            LoadConfig(null, null);
+            if (proxyConfig.autoStart)
+            {
+                StartServer(null, null);
+            }
         }
     }
 }

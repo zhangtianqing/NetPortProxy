@@ -1,0 +1,11 @@
+C:\Users\admin\source\repos\NetPortProxy\bin\Debug\NetPortProxy.exe.config
+C:\Users\admin\source\repos\NetPortProxy\bin\Debug\NetPortProxy.exe
+C:\Users\admin\source\repos\NetPortProxy\bin\Debug\NetPortProxy.pdb
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\NetPortProxy.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\NetPortProxy.csproj.SuggestedBindingRedirects.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\NetPortProxy.Form1.resources
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\NetPortProxy.Properties.Resources.resources
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\NetPortProxy.csproj.GenerateResource.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\NetPortProxy.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\NetPortProxy.exe
+C:\Users\admin\source\repos\NetPortProxy\obj\Debug\NetPortProxy.pdb

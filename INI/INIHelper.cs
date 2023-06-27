@@ -1,7 +1,9 @@
+using NetPortProxy;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 /// <summary>
 ///  INI 文件操作工具类
@@ -128,14 +130,10 @@ public static class INIHelper
         //Debug.Log("读取配置");
         try
         {
-            //if (!Directory.Exists(Application.streamingAssetsPath))
-            //{
-            //    Directory.CreateDirectory(Application.streamingAssetsPath);
-            //}
             if (!File.Exists(path))
             {
                 File.Create(path).Close();
-                MessageBox.Show("Create Success:" + path);
+                Form1.ins.LogMsg("Create Success:" + path);
             }
             else
             {
@@ -149,7 +147,7 @@ public static class INIHelper
         }
         catch (Exception e)
         {
-            MessageBox.Show("INIFile Not Found Or Create:\r\n" + path + "\r\n" + e);
+            Form1.ins.LogMsg("INIFile Not Found Or Create:\r\n" + path + "\r\n" + e);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace NetPortProxy.Bridge
 {
@@ -43,7 +44,7 @@ namespace NetPortProxy.Bridge
             }
             catch (Exception e)
             {
-                MessageBox.Show("AcceptError:" + e.Message);
+                logCallback?.Invoke("AcceptError:" + e.Message);
                 if (serverState)
                 {
                     tcpServer.BeginAccept(Accept, tcpServer);
@@ -61,7 +62,7 @@ namespace NetPortProxy.Bridge
                 tcpClient.Send(RecvBuffer, 0, count, SocketFlags.None, out SocketError error);
                 if (error != SocketError.Success)
                 {
-                    MessageBox.Show("TcpServerRecvCallback:" + error);
+                    logCallback?.Invoke("TcpServerRecvCallback:" + error);
                     Console.WriteLine(error);
                 }
             }
@@ -95,7 +96,7 @@ namespace NetPortProxy.Bridge
                 {
                     if (socket != null)
                     {
-                        MessageBox.Show("TCP成功连上远程服务");
+                        logCallback?.Invoke("TCP成功连上远程服务");
                     }
                 }
             }
