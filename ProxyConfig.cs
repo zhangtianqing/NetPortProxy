@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,14 +24,14 @@ namespace NetPortProxy
         public void LoadConfig()
         {
 
-            this.autoStart = INIHelper.GetBool(nameof(autoStart));
+            this.autoStart = INIHelper.GetBool(nameof(autoStart), INIHelper.SectionName.config, false);
 
-            this.remoteAddress = INIHelper.GetString(nameof(remoteAddress));
-            this.remotePort = INIHelper.GetInt(nameof(remotePort));
-            this.localAddress = INIHelper.GetString(nameof(localAddress));
-            this.localPort = INIHelper.GetInt(nameof(localPort));
+            this.remoteAddress = INIHelper.GetString(nameof(remoteAddress), INIHelper.SectionName.config, "127.0.0.1");
+            this.remotePort = INIHelper.GetInt(nameof(remotePort), INIHelper.SectionName.config, 4567);
+            this.localAddress = INIHelper.GetString(nameof(localAddress), INIHelper.SectionName.config, "127.0.0.1");
+            this.localPort = INIHelper.GetInt(nameof(localPort), INIHelper.SectionName.config, 4568);
 
-            this.protocol = INIHelper.GetInt(nameof(protocol));
+            this.protocol = INIHelper.GetInt(nameof(protocol), INIHelper.SectionName.config, 1);
         }
 
         public bool SaveProxyConfig(string remoteAddress, int remotePort, string localAddress, int localPort, bool autoStart, int protocol)
